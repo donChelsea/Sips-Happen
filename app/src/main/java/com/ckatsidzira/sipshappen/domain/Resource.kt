@@ -3,6 +3,7 @@ package com.ckatsidzira.sipshappen.domain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T?): Resource<T>(data)
@@ -14,13 +15,15 @@ inline fun <T> safeFlow(crossinline block: suspend () -> T): Flow<Resource<T>> =
     emit(Resource.Loading())
     emit(Resource.Success(block()))
 }.catch { e ->
-    emit(Resource.Error(message = e.localizedMessage ?: "An error occurred"))
+    Timber.tag("Resource::safeFlow").e(e.localizedMessage)
+    emit(Resource.Error(message = "Something went wrong."))
 }
 
 suspend inline fun <T> safeCall(crossinline block: suspend () -> T): Resource<T> {
     return try {
         Resource.Success(block())
     } catch (e: Exception) {
-        Resource.Error(e.localizedMessage ?: "An error occurred")
+        Timber.tag("Resource::safeCall").e(e.localizedMessage)
+        Resource.Error("Something went wrong.")
     }
 }

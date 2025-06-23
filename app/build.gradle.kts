@@ -73,29 +73,36 @@ dependencies {
     // Extended icons
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
-    // Navigation
-    implementation("androidx.navigation:navigation-compose:2.8.6")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    // Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.12.1")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.55")
     kapt("com.google.dagger:hilt-compiler:2.55")
 
-    // Retrofit + Gson + OkHttp
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.google.code.gson:gson:2.12.1")
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.6")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // OkHttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Paging
     implementation("androidx.paging:paging-runtime:3.3.6")
     implementation("androidx.paging:paging-compose:3.3.6")
 
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.room:room-paging:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }
 
 kapt {

@@ -36,8 +36,6 @@ class BeerRepositoryImpl @Inject constructor(
             cacheDao.clearAll()
             cacheDao.upsertAll(entities)
 
-            println(entities.toString())
-
             entities.map { it.toDomain() }
         }
     }
