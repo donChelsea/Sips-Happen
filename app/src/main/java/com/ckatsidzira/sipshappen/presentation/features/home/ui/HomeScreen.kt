@@ -8,9 +8,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ckatsidzira.sipshappen.presentation.custom.ShowError
-import com.ckatsidzira.sipshappen.presentation.custom.ShowLoading
-import com.ckatsidzira.sipshappen.presentation.custom.ShowOffline
+import com.ckatsidzira.sipshappen.presentation.custom.state.ShowError
+import com.ckatsidzira.sipshappen.presentation.custom.state.ShowLoading
+import com.ckatsidzira.sipshappen.presentation.custom.state.ShowOffline
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeUiAction
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeUiState
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeViewModel

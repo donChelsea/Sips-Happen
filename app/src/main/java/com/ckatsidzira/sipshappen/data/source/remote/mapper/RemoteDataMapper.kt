@@ -1,4 +1,4 @@
-package com.ckatsidzira.sipshappen.data.source.mapper
+package com.ckatsidzira.sipshappen.data.source.remote.mapper
 
 import com.ckatsidzira.sipshappen.data.source.local.model.AmountEntity
 import com.ckatsidzira.sipshappen.data.source.local.model.BeerEntity

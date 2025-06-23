@@ -1,4 +1,4 @@
-package com.ckatsidzira.sipshappen.presentation.custom
+package com.ckatsidzira.sipshappen.presentation.custom.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

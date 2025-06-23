@@ -1,9 +1,10 @@
 package com.ckatsidzira.sipshappen.data.repository
 
 import com.ckatsidzira.sipshappen.data.source.local.BeerDatabase
-import com.ckatsidzira.sipshappen.data.source.mapper.toDomain
-import com.ckatsidzira.sipshappen.data.source.mapper.toEntity
+import com.ckatsidzira.sipshappen.data.source.local.mapper.toDomain
+import com.ckatsidzira.sipshappen.data.source.remote.mapper.toEntity
 import com.ckatsidzira.sipshappen.data.source.remote.BeerApi
+import com.ckatsidzira.sipshappen.data.source.remote.mapper.toDomain
 import com.ckatsidzira.sipshappen.domain.Resource
 import com.ckatsidzira.sipshappen.domain.model.Beer
 import com.ckatsidzira.sipshappen.domain.repository.BeerRepository

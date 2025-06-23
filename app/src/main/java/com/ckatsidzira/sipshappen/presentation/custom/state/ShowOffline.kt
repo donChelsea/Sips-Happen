@@ -1,4 +1,5 @@
-package com.ckatsidzira.sipshappen.presentation.custom
+package com.ckatsidzira.sipshappen.presentation.custom.state
+
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.NetworkCheck
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,9 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ShowError(
+fun ShowOffline(
     modifier: Modifier = Modifier,
-    message: String = "Something went wrong."
 ) {
     Box(
         contentAlignment = Alignment.Center,
@@ -33,17 +33,17 @@ fun ShowError(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                imageVector = Icons.Default.Error,
+                imageVector = Icons.Default.NetworkCheck,
                 modifier = Modifier
                     .padding(bottom = 16.dp)
                     .size(40.dp),
-                tint = MaterialTheme.colorScheme.error,
+                tint = MaterialTheme.colorScheme.primary,
                 contentDescription = ""
             )
             Text(
-                text = message,
+                text = "Offline",
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.error,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 22.sp
             )
         }
@@ -52,6 +52,6 @@ fun ShowError(
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewErrorScreen() {
-    ShowError()
+fun PreviewOfflineScreen() {
+    ShowOffline()
 }

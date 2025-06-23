@@ -1,4 +1,4 @@
-package com.ckatsidzira.sipshappen.presentation.custom
+package com.ckatsidzira.sipshappen.presentation.custom.liststate
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
