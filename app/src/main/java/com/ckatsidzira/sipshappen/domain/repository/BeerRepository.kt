@@ -5,6 +5,6 @@ import com.ckatsidzira.sipshappen.domain.model.Beer
 import kotlinx.coroutines.flow.Flow
 
 interface BeerRepository {
-    suspend fun getBeersFlow(): Flow<Resource<List<Beer>>>
+    fun getBeersFlow(): Flow<Resource<List<Beer>>>
     suspend fun getBeerById(id: Int): Resource<Beer>
 }

@@ -8,6 +8,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ckatsidzira.sipshappen.presentation.custom.ShowError
+import com.ckatsidzira.sipshappen.presentation.custom.ShowLoading
+import com.ckatsidzira.sipshappen.presentation.custom.ShowOffline
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeUiAction
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeUiState
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeViewModel
@@ -40,9 +43,12 @@ fun HomeLayout(
             beers = state.screenData.beers,
             onAction = onAction
         )
-        is ScreenData.Error -> {}
-        is ScreenData.Loading -> {}
-        is ScreenData.Offline -> {}
+        is ScreenData.Error -> ShowError(
+            modifier = modifier,
+            message = state.screenData.message
+        )
+        is ScreenData.Loading -> ShowLoading(modifier = modifier)
+        is ScreenData.Offline -> ShowOffline(modifier = modifier)
     }
 }
 

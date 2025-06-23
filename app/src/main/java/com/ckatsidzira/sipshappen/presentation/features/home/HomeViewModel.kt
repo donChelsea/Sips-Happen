@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
@@ -44,22 +45,24 @@ class HomeViewModel @Inject constructor(
                 if (!isConnected) {
                     ScreenData.Offline
                 } else {
-                    when (result) {
-                        is Resource.Error -> ScreenData.Error(
-                            result.message ?: "An error occurred."
+                    if (result.data.orEmpty().isNotEmpty()) {
+                        ScreenData.Data(
+                            result.data.orEmpty().map { it.toUiModel() }
                         )
-                        is Resource.Loading -> ScreenData.Loading
-                        is Resource.Success -> ScreenData.Data(
-                            beers = result.data.orEmpty().map { it.toUiModel() }
-                        )
+                    } else {
+                        ScreenData.Loading
                     }
                 }
-            }.collectLatest {
-                println(it)
-                updateState(screenData = it)
             }
+                .catch { throwable ->
+                    emit(ScreenData.Error(throwable.localizedMessage ?: "Something went wrong."))
+                }.collectLatest {
+                    println(it)
+                    updateState(screenData = it)
+                }
         }
     }
+
 
     private fun updateState(
         screenData: ScreenData = _uiState.value.screenData

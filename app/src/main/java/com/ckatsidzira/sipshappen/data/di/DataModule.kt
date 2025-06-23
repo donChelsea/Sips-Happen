@@ -1,9 +1,11 @@
 package com.ckatsidzira.sipshappen.data.di
 
 import android.content.Context
+import androidx.room.Room
 import com.ckatsidzira.sipshappen.BuildConfig
 import com.ckatsidzira.sipshappen.data.network.ConnectivityModule
 import com.ckatsidzira.sipshappen.data.repository.BeerRepositoryImpl
+import com.ckatsidzira.sipshappen.data.source.local.BeerDatabase
 import com.ckatsidzira.sipshappen.data.source.remote.BeerApi
 import com.ckatsidzira.sipshappen.domain.repository.BeerRepository
 import dagger.Module
@@ -20,6 +22,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {
+    @Provides
+    @Singleton
+    fun provideBeerDatabase(
+        @ApplicationContext context: Context,
+    ): BeerDatabase =
+        Room.databaseBuilder(
+            context,
+            BeerDatabase::class.java,
+            "beers.db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     @Singleton
@@ -44,8 +58,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideBeerRepository(api: BeerApi): BeerRepository =
-        BeerRepositoryImpl(api)
+    fun provideBeerRepository(
+        api: BeerApi,
+        db: BeerDatabase
+    ): BeerRepository =
+        BeerRepositoryImpl(api, db)
 
     @Provides
     @Singleton

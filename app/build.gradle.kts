@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "BASE_URL", "\"https://punkapi.online/v3/\"")
+        buildConfigField("String", "IMAGES_BASE_URL", "\"https://punkapi.online/v3/images/\"")
     }
 
     buildTypes {
@@ -83,6 +84,7 @@ dependencies {
     // Retrofit + Gson + OkHttp
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.12.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Paging

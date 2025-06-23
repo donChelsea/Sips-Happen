@@ -10,7 +10,7 @@ sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Loading<T>(val isLoading: Boolean = true): Resource<T>(null)
 }
 
-inline fun <T> safeFlow(crossinline block: () -> T): Flow<Resource<T>> = flow {
+inline fun <T> safeFlow(crossinline block: suspend () -> T): Flow<Resource<T>> = flow {
     emit(Resource.Loading())
     emit(Resource.Success(block()))
 }.catch { e ->
