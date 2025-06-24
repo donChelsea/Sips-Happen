@@ -16,7 +16,10 @@ interface BeerApi {
     @GET("beers/{id}")
     suspend fun getBeerById(@Path("id") id: Int): BeerDto
 
+    @GET("beers/random")
+    suspend fun getRandomBeer(): BeerDto
+
     companion object {
-        const val PER_PAGE = 15
+        const val PER_PAGE = 10
     }
 }

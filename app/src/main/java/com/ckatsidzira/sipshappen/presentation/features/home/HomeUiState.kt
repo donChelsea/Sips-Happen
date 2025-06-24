@@ -10,12 +10,14 @@ data class HomeUiState(
 
 @Immutable
 sealed class HomeUiEvent {
-    data class OnBeerClicked(val id: Int) : HomeUiEvent()
+    data class OnBeerClicked(val beer: BeerUiModel) : HomeUiEvent()
+    data object OnViewAllClicked : HomeUiEvent()
 }
 
 @Immutable
 sealed class HomeUiAction {
-    data class OnBeerClicked(val id: Int) : HomeUiAction()
+    data class OnBeerClicked(val beer: BeerUiModel) : HomeUiAction()
+    data object OnViewAllClicked : HomeUiAction()
 }
 
 @Immutable
@@ -28,6 +30,7 @@ sealed class ScreenData {
 
     @Immutable
     data class Data(
-        val beers: List<BeerUiModel> = emptyList()
+        val beers: List<BeerUiModel> = emptyList(),
+        val randomBeer: BeerUiModel = BeerUiModel(),
     ) : ScreenData()
 }

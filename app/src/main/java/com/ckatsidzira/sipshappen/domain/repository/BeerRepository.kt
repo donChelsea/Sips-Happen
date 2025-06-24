@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface BeerRepository {
     fun getBeersFlow(): Flow<Resource<List<Beer>>>
     suspend fun getBeerById(id: Int): Resource<Beer>
+    suspend fun getRandomBeer(): Beer
 }

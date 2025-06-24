@@ -43,4 +43,6 @@ class BeerRepositoryImpl @Inject constructor(
     override suspend fun getBeerById(id: Int): Resource<Beer> = safeCall {
         api.getBeerById(id).toDomain()
     }
+
+    override suspend fun getRandomBeer(): Beer = api.getRandomBeer().toDomain()
 }
