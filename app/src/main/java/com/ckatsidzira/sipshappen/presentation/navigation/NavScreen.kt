@@ -6,7 +6,7 @@ import androidx.compose.runtime.Immutable
 sealed class NavScreen(val route: String) {
     data object Home: NavScreen("Home")
     data object Details: NavScreen("Details")
-    data object Favorites: NavScreen("Favorites")
+    data object Beers: NavScreen("Beers")
 
     object DetailArgs {
         const val ID = "id"

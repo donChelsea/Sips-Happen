@@ -27,7 +27,7 @@ val navItems = listOf(
     NavItem(
         title = "Search",
         icon = Icons.Default.Search,
-        route = NavScreen.Favorites.route
+        route = NavScreen.Beers.route
     ),
 )
 

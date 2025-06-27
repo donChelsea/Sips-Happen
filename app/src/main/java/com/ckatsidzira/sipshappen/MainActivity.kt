@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.navigation.navArgument
+import com.ckatsidzira.sipshappen.presentation.features.beers.ui.BeersScreen
 import com.ckatsidzira.sipshappen.presentation.features.details.ui.DetailsScreen
 import com.ckatsidzira.sipshappen.presentation.features.home.ui.HomeScreen
 import com.ckatsidzira.sipshappen.presentation.navigation.ui.TopNavBar
@@ -67,10 +68,10 @@ class MainActivity : ComponentActivity() {
                                 DetailsScreen(navController = navController)
                                 title = NavScreen.Details.route
                             }
-//                            composable(route = NavScreen.Details.route) {
-//                                DetailsScreen(navController = navController)
-//                                title = Screen.Favorites.route
-//                            }
+                            composable(route = NavScreen.Beers.route) {
+                                BeersScreen(navController = navController)
+                                title = NavScreen.Beers.route
+                            }
                         }
 
                     NavHost(

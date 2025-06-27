@@ -1,5 +1,6 @@
 package com.ckatsidzira.sipshappen.data.source.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
@@ -17,4 +18,7 @@ interface CacheDao {
 
     @Query("DELETE FROM cache")
     suspend fun clearAll()
+
+    @Query("SELECT * FROM cache")
+    fun pagingSource(): PagingSource<Int, BeerEntity>
 }

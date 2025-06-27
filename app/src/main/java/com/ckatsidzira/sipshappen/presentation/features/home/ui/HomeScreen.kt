@@ -42,7 +42,7 @@ fun HomeScreen(
         viewModel.events.collectLatest { event ->
             when (event) {
                 is HomeUiEvent.OnBeerClicked -> navController.navigate(NavScreen.Details.withArgs(event.beer.id))
-                HomeUiEvent.OnViewAllClicked -> println("View All clicked")
+                HomeUiEvent.OnViewAllClicked -> navController.navigate(NavScreen.Beers.route)
             }
         }
     }
