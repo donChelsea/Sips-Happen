@@ -14,9 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.ckatsidzira.sipshappen.presentation.custom.BannerSection
-import com.ckatsidzira.sipshappen.presentation.custom.card.RandomBeerCard
 import com.ckatsidzira.sipshappen.presentation.custom.card.BeerItemCard
+import com.ckatsidzira.sipshappen.presentation.custom.card.RandomBeerCard
 import com.ckatsidzira.sipshappen.presentation.custom.state.ShowError
 import com.ckatsidzira.sipshappen.presentation.custom.state.ShowLoading
 import com.ckatsidzira.sipshappen.presentation.custom.state.ShowOffline
@@ -26,19 +27,21 @@ import com.ckatsidzira.sipshappen.presentation.features.home.HomeUiState
 import com.ckatsidzira.sipshappen.presentation.features.home.HomeViewModel
 import com.ckatsidzira.sipshappen.presentation.features.home.ScreenData
 import com.ckatsidzira.sipshappen.presentation.model.BeerUiModel
+import com.ckatsidzira.sipshappen.presentation.navigation.NavScreen
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navController: NavHostController
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(true) {
         viewModel.events.collectLatest { event ->
             when (event) {
-                is HomeUiEvent.OnBeerClicked -> println("Beer: ${event.beer.name} clicked")
+                is HomeUiEvent.OnBeerClicked -> navController.navigate(NavScreen.Details.withArgs(event.beer.id))
                 HomeUiEvent.OnViewAllClicked -> println("View All clicked")
             }
         }
@@ -57,17 +60,17 @@ fun HomeLayout(
     state: HomeUiState,
     onAction: (HomeUiAction) -> Unit
 ) {
-    when (state.screenData) {
+    when (val data = state.screenData) {
         is ScreenData.Data -> HomeContent(
             modifier = modifier,
-            beers = state.screenData.beers,
-            randomBeer = state.screenData.randomBeer,
+            beers = data.beers,
+            randomBeer = data.randomBeer,
             onAction = onAction
         )
 
         is ScreenData.Error -> ShowError(
             modifier = modifier,
-            message = state.screenData.message
+            message = data.message
         )
 
         is ScreenData.Loading -> ShowLoading(modifier = modifier)
@@ -82,9 +85,11 @@ fun HomeContent(
     randomBeer: BeerUiModel,
     onAction: (HomeUiAction) -> Unit
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+    ) {
         BannerSection(
-            title = "Today's choice",
+            title = "Try something new",
             modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp),
         )
 
