@@ -3,7 +3,7 @@ package com.ckatsidzira.sipshappen.data.di
 import android.content.Context
 import androidx.room.Room
 import com.ckatsidzira.sipshappen.BuildConfig
-import com.ckatsidzira.sipshappen.data.network.ConnectivityModule
+import com.ckatsidzira.sipshappen.data.network.ConnectivityObserver
 import com.ckatsidzira.sipshappen.data.repository.BeerRepositoryImpl
 import com.ckatsidzira.sipshappen.data.source.local.BeerDatabase
 import com.ckatsidzira.sipshappen.data.source.remote.BeerApi
@@ -66,6 +66,6 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideConnectivityModule(@ApplicationContext context: Context): ConnectivityModule =
-        ConnectivityModule(context)
+    fun provideConnectivityObserver(@ApplicationContext context: Context): ConnectivityObserver =
+        ConnectivityObserver(context)
 }

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -28,7 +29,7 @@ abstract class BaseViewModel<UiState, UiEvent, UiAction> : ViewModel() {
 
     val safeViewModelScope: CoroutineScope = CoroutineScope(
         context = viewModelScope.coroutineContext + CoroutineExceptionHandler { _, t ->
-            println("ViewModel: ${t.message}")
+            Timber.e(t)
         })
 
     protected fun emitUiEvent(event: UiEvent) {

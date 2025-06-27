@@ -1,18 +1,15 @@
 package com.ckatsidzira.sipshappen.presentation.features.home
 
-import com.ckatsidzira.sipshappen.data.network.ConnectivityModule
+import com.ckatsidzira.sipshappen.data.network.ConnectivityObserver
 import com.ckatsidzira.sipshappen.domain.Resource
 import com.ckatsidzira.sipshappen.domain.base.BaseViewModel
 import com.ckatsidzira.sipshappen.domain.mapper.toUiModel
 import com.ckatsidzira.sipshappen.domain.repository.BeerRepository
-import com.ckatsidzira.sipshappen.presentation.model.BeerUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
@@ -21,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: BeerRepository,
-    private val connectivityModule: ConnectivityModule,
+    private val connectivityObserver: ConnectivityObserver,
 ) : BaseViewModel<HomeUiState, HomeUiEvent, HomeUiAction>() {
 
     private var currentData = ScreenData.Data()
@@ -45,7 +42,7 @@ class HomeViewModel @Inject constructor(
     private fun observeBeers() {
         safeLaunch(Dispatchers.IO) {
             combine(
-                connectivityModule.isConnected,
+                connectivityObserver.isConnected,
                 repository.getBeersFlow()
             ) { isConnected, resource ->
                 when {

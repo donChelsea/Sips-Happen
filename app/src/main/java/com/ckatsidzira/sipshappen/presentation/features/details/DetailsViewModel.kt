@@ -1,7 +1,7 @@
 package com.ckatsidzira.sipshappen.presentation.features.details
 
 import androidx.lifecycle.SavedStateHandle
-import com.ckatsidzira.sipshappen.data.network.ConnectivityModule
+import com.ckatsidzira.sipshappen.data.network.ConnectivityObserver
 import com.ckatsidzira.sipshappen.domain.Resource
 import com.ckatsidzira.sipshappen.domain.base.BaseViewModel
 import com.ckatsidzira.sipshappen.domain.mapper.toUiModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val repository: BeerRepository,
-    private val connectivityModule: ConnectivityModule,
+    private val connectivityObserver: ConnectivityObserver,
 ) : BaseViewModel<DetailsUiState, DetailsUiEvent, DetailsUiAction>() {
     private val _uiState: MutableStateFlow<DetailsUiState> = MutableStateFlow(DetailsUiState())
     override val uiState: StateFlow<DetailsUiState>
@@ -39,7 +39,7 @@ class DetailsViewModel @Inject constructor(
 
     private fun getBeer() {
         safeLaunch(Dispatchers.IO) {
-            connectivityModule.isConnected.collectLatest { isConnected ->
+            connectivityObserver.isConnected.collectLatest { isConnected ->
                 if (!isConnected) {
                     _uiState.update { it.copy(screenData = ScreenData.Offline) }
                 } else {
